@@ -10,6 +10,8 @@ import java.io.FileInputStream;
 import java.io.PrintWriter;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.NoSuchElementException;
 
 public class SuperHeroDB {
     
@@ -28,19 +30,44 @@ public class SuperHeroDB {
             System.exit(0);
         }
         
-        ArrayList<String> SuperHeroes = new ArrayList<String>();
+        ArrayList<SuperHero> Heroes = new ArrayList<SuperHero>();
+        
+        SuperHero flash = new SuperHero("Flash","Speed");
+        Heroes.add(flash);
+        SuperHero batman = new SuperHero("Batman","Money");
+        Heroes.add(batman);
+        SuperHero SuperMan = new SuperHero("SuperMan","Strength");
+        Heroes.add(SuperMan);
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        for(SuperHero hero: Heroes)
+        {
+        outStream.println(hero.getName() + " " + hero.getSuperPower() + " " + hero.getIDNum());
+        }
         
         outStream.close();
+        
+        Scanner reader;
+        try  {
+            FileInputStream sup = new FileInputStream("Superheroes.txt");
+            reader  = new Scanner(sup);
+           
+            while(reader.hasNext()){
+                String line = reader.nextLine();
+                System.out.println(line);
+              
+            }
+           
+            reader.close();
+        }catch (NoSuchElementException | IOException e){
+            e.printStackTrace();
+        }
+        
+        
+        
+        
+     
+        outStream.close();
+        
     }
 }
